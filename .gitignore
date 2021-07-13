@@ -1,4 +1,4 @@
 a.out
 main.c
-*.o
-libft/*.o
+.o
+libft/.o

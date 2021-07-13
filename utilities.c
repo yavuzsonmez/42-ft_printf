@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/13 19:13:20 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/13 20:06:44 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 t_struct	*new_struct(void)
 {
-	t_struct	*data;
+	t_struct	data;
+	t_struct	*p_data;
 
-	(*data).hash = 0;
-	(*data).space = 0;
-	(*data).plus = 0;
-	(*data).zero = 0;
-	(*data).minus = 0;
-	(*data).prec = 0;
-	(*data).width = 0;
-	(*data).flen = 0;
-	(*data).alen = 0;
-	(*data).print = 0;
-	(*data).type = 0;
-	(*data).type = 0;
-	(*data).argint = 0;
-	(*data).argstr = 0;
-	(*data).argptr = 0;
-	(*data).argunsint = 0;
-	return (data);
+	p_data = &data;
+	data.hash = 0;
+	data.space = 0;
+	data.plus = 0;
+	data.zero = 0;
+	data.minus = 0;
+	data.prec = 0;
+	data.width = 0;
+	data.flen = 0;
+	data.alen = 0;
+	data.print = 0;
+	data.type = 0;
+	data.type = 0;
+	data.argint = 0;
+	data.argstr = 0;
+	data.argptr = 0;
+	data.argunsint = 0;
+	return (p_data);
 }
 
 int	ft_count_digit(int n)
@@ -93,12 +95,12 @@ int	ft_get_type(const char *str)
 	return (-1);
 }
 
-int	ft_set_format(va_list args, t_struct *data, const char *str)
+int	ft_set_format(t_struct *data, const char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str[i] && str[i] != (*data).type)
+	while (str[i])
 	{
 		if (str[i] == '#' && (*data).hash == 0)
 			(*data).hash = 1;
@@ -108,7 +110,7 @@ int	ft_set_format(va_list args, t_struct *data, const char *str)
 			(*data).space = 1;
 		else if (str[i] == '-' && (*data).minus == 0)
 			(*data).minus = 1;
-		else if(str[i] == '0' && (*data).zero == 0 && (*data).minus == 0)
+		else if (str[i] == '0' && (*data).zero == 0 && (*data).minus == 0)
 			(*data).zero = 1;
 		else
 			return (-1);
@@ -118,7 +120,7 @@ int	ft_set_format(va_list args, t_struct *data, const char *str)
 }
 
 
-void	ft_print_type(va_list args, t_struct *data)
+void	ft_print_type(t_struct *data)
 {
 	if ((*data).type == INT)
 		ft_putchar_fd((*data).argint, 1);
@@ -136,20 +138,20 @@ void	ft_print_type(va_list args, t_struct *data)
 		if ((*data).type == PTR)
 		{
 			ft_putstr_fd("0x", 1);
-			ft_puthexa_fd((*data).argptr, 1);
+			ft_puthexa_fd((*data).argptr, data, 1);
 		}
 		else
-			ft_puthexa_fd((*data).argunsint, 1);
+			ft_puthexa_fd((*data).argunsint, data, 1);
 	}
 	else if ((*data).type == UNSINT)
-		ft_putunsint_fd((*data).argunsint, 1);
+		ft_putunsint_fd((*data).argunsint, data, 1);
 	else if ((*data).type == PRCT)
 		ft_putchar_fd((*data).argint, 1);
 	else
 		return ;
 }
 
-void	ft_arg_len(args, data);
+void	ft_arg_len(va_list args, t_struct *data)
 {
 	if ((*data).type == INT)
 		(*data).argint = va_arg(args, int);
@@ -176,7 +178,7 @@ void	ft_arg_len(args, data);
 void	ft_printer(va_list args, t_struct *data)
 {
 	ft_arg_len(args, data);
-	ft_print_type(args, data);
+	ft_print_type(data);
 }
 
 int		ft_parse_format(va_list args, t_struct *data, const char *str)
@@ -187,7 +189,7 @@ int		ft_parse_format(va_list args, t_struct *data, const char *str)
 	(*data).type = ft_get_type(str);
 	if ((*data).type == -1)
 		return(-1);
-	state = ft_set_format(args, data, str);
+	state = ft_set_format(data, str);
 	if (state == -1)
 		return (-1);
 	ft_printer(args, data);

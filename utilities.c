@@ -6,12 +6,11 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 16:11:46 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 17:02:22 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <stdio.h>
 
 t_struct	*new_struct(void)
 {
@@ -72,9 +71,9 @@ int	ft_get_type(const char *str)
 	while (*str)
 	{
 		if (*str == 'd')
-			return (INTd);
+			return (INTD);
 		else if (*str == 'i')
-			return (INTi);
+			return (INTI);
 		else if (*str == 'c')
 			return (CHAR);
 		else if (*str == 's')
@@ -99,9 +98,9 @@ int	ft_get_chartype(t_struct *data)
 	int	k;
 
 	k = (*data).type;
-	if (k == INTd)
+	if (k == INTD)
 		return ('d');
-	else if (k == INTi)
+	else if (k == INTI)
 		return ('i');
 	else if (k == CHAR)
 		return ('c');
@@ -136,7 +135,9 @@ int	ft_set_format(t_struct *data, const char *str)
 		else if (str[i] == '-' && (*data).minus == 0)
 			(*data).minus = 1;
 		else if (str[i] == '0' && (*data).zero == 0 && (*data).minus == 0)
-			(*data).zero = 1;
+			(*data).zero = ft_printf_atoi(str + i);
+		else if (str[i] >= '0' && str[i] <= '9')
+			i += 0;
 		else
 			return (-1);
 		i++;
@@ -149,7 +150,7 @@ int	ft_print_type(t_struct *data)
 	int	k;
 
 	k = (*data).type;
-	if (k == INTd || k == INTi)
+	if (k == INTD || k == INTI)
 		ft_putnbr_fd((*data).argint, data, 1);
 	else if (k == CHAR)
 		ft_putchar_fd((*data).argint, data, 1);
@@ -163,7 +164,7 @@ int	ft_print_type(t_struct *data)
 		ft_putunslong_fd((*data).argptr, data, 1);
 	else if (k == UNSINT)
 		ft_putunsint_fd((*data).argunsint, data, 1);
-	else if (k == PRCT && (*data).argint == 1)
+	else if (k == PRCT)
 		ft_putchar_fd('%', data, 1);
 	else
 		return (-1);
@@ -175,21 +176,18 @@ void	ft_arg_len(va_list args, t_struct *data)
 	int	k;
 
 	k = (*data).type;
-	if (k == INTd || k == INTi || k == CHAR)
+	if (k == INTD || k == INTI || k == CHAR)
 		(*data).argint = va_arg(args, int);
-	else if (k == PRCT)
-	{
-		(*data).argint = 1;
-		(*data).alen = 1;
-	}
 	else if (k == STR)
 		(*data).argstr = va_arg(args, char *);
 	else if (k == PTR)
 		(*data).argptr = va_arg(args, unsigned long);
 	else if (k == LOWHEXA || k == UPHEXA || k == UNSINT)
 		(*data).argunsint = va_arg(args, unsigned int);
-	if (k == INTd || k == INTi || k == CHAR)
+	if (k == INTD || k == INTI)
 		(*data).alen = ft_count_digit((*data).argint);
+	else if (k == PRCT || k == CHAR)
+		(*data).alen = 1;
 	else if (k == STR && (*data).argstr)
 		(*data).alen = ft_strlen((*data).argstr);
 	else if (k == PTR)

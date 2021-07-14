@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 13:38:29 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 14:12:38 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_struct	*new_struct(void)
 	(*p_data).alen = 0;
 	(*p_data).print = 0;
 	(*p_data).type = 0;
-	(*p_data).type = 0;
+	(*p_data).chartype = 0;
 	(*p_data).argint = 0;
 	(*p_data).argstr = 0;
 	(*p_data).argptr = 0;
@@ -73,8 +73,10 @@ int	ft_get_type(const char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 'd' || str[i] == 'i')
-			return (INT);
+		if (str[i] == 'd')
+			return (INTd);
+		else if (str[i] == 'i')
+			return (INTi);
 		else if (str[i] == 'c')
 			return (CHAR);
 		else if (str[i] == 's')
@@ -91,6 +93,32 @@ int	ft_get_type(const char *str)
 			return (PRCT);
 		i++;
 	}
+	return (-1);
+}
+
+int	ft_get_chartype(t_struct *data)
+{
+	int	k;
+
+	k = (*data).type;
+	if (k == INTd)
+		return ('d');
+	else if (k == INTi)
+		return ('i');
+	else if (k == CHAR)
+		return ('c');
+	else if (k == STR)
+		return ('s');
+	else if (k == PTR)
+		return ('p');
+	else if (k == LOWHEXA)
+		return ('x');
+	else if (k == UPHEXA)
+		return ('X');
+	else if (k == UNSINT)
+		return ('u');
+	else if (k == PRCT)
+		return ('%');
 	return (-1);
 }
 
@@ -111,6 +139,8 @@ int	ft_set_format(t_struct *data, const char *str)
 			(*data).minus = 1;
 		else if (str[i] == '0' && (*data).zero == 0 && (*data).minus == 0)
 			(*data).zero = 1;
+		else if (str[i] == (*data).chartype)
+			return (0);
 		else
 			return (-1);
 		i++;
@@ -123,7 +153,7 @@ int	ft_print_type(t_struct *data)
 	int	k;
 
 	k = (*data).type;
-	if (k == INT)
+	if (k == INTd || k == INTi)
 		ft_putnbr_fd((*data).argint, data, 1);
 	else if (k == CHAR)
 		ft_putchar_fd((*data).argint, data, 1);
@@ -152,7 +182,7 @@ void	ft_arg_len(va_list args, t_struct *data)
 	int	k;
 
 	k = (*data).type;
-	if (k == INT || k == CHAR)
+	if (k == INTd || k == INTi || k == CHAR)
 		(*data).argint = va_arg(args, int);
 	else if (k == PRCT)
 	{
@@ -165,7 +195,7 @@ void	ft_arg_len(va_list args, t_struct *data)
 		(*data).argptr = va_arg(args, unsigned long);
 	else if (k == LOWHEXA || k == UPHEXA || k == UNSINT)
 		(*data).argunsint = va_arg(args, unsigned int);
-	if (k == INT || k == CHAR)
+	if (k == INTd || k == INTi || k == CHAR)
 		(*data).alen = ft_count_digit((*data).argint);
 	else if (k == STR && (*data).argstr)
 		(*data).alen = ft_strlen((*data).argstr);
@@ -193,9 +223,10 @@ int		ft_parse_format(va_list args, t_struct *data, const char *str)
 
 	state = 0;
 	(*data).type = ft_get_type(str);
-	if ((*data).type == -1)
+	(*data).chartype = ft_get_chartype(data);
+	if ((*data).type == -1 || (*data).chartype == -1)
 		return (-1);
-	//state = ft_set_format(data, str);
+	state = ft_set_format(data, str);
 	if (state == -1)
 		return (-1);
 	state = ft_printer(args, data);

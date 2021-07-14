@@ -6,7 +6,7 @@
 #    By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 11:10:43 by ysonmez           #+#    #+#              #
-#    Updated: 2021/07/13 19:22:40 by ysonmez          ###   ########.fr        #
+#    Updated: 2021/07/14 14:30:10 by ysonmez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME	=		libftprintf.a
 
 SRCS	=		ft_printf.c \
 				utilities.c \
+				utilities2.c \
 				print_type.c \
 
 

@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 14:12:38 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 14:29:34 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	ft_set_format(t_struct *data, const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str[i] && str[i] != (*data).chartype)
 	{
 		if (str[i] == '#' && (*data).hash == 0)
 			(*data).hash = 1;
@@ -139,8 +139,6 @@ int	ft_set_format(t_struct *data, const char *str)
 			(*data).minus = 1;
 		else if (str[i] == '0' && (*data).zero == 0 && (*data).minus == 0)
 			(*data).zero = 1;
-		else if (str[i] == (*data).chartype)
-			return (0);
 		else
 			return (-1);
 		i++;
@@ -212,8 +210,10 @@ int	ft_printer(va_list args, t_struct *data)
 		ft_putstr_fd("(null)", data, 1);
 	if ((*data).type == PTR)
 		ft_putstr_fd("0x", data, 1);
+	ft_print_before(data);
 	if (ft_print_type(data) == -1)
 		return (-1);
+	ft_print_after(data);
 	return (0);
 }
 

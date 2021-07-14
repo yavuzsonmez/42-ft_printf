@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:13:02 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 14:06:01 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 14:28:37 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int			ft_parse_format(va_list args, t_struct *data, const char *str);
 void		ft_puthexa_fd(unsigned long n, t_struct *data, int fd);
 void		ft_putunsint_fd(unsigned int n, t_struct *data, int fd);
 void		ft_putcharr_fd(char c, int fd);
+void		ft_print_before(t_struct *data);
+void		ft_print_after(t_struct *data);
 
 int			ft_printf(const char *str, ...);
 

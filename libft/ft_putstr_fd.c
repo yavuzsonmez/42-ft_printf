@@ -6,13 +6,13 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:14:34 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/06/22 14:04:22 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 09:48:08 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, t_struct *data, int fd)
 {
 	size_t	i;
 
@@ -21,7 +21,7 @@ void	ft_putstr_fd(char *s, int fd)
 	{
 		while (s[i])
 		{
-			write(fd, s + i, 1);
+			ft_putchar_fd(s[i], data, fd);
 			i++;
 		}
 	}

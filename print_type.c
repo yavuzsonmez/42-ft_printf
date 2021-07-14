@@ -6,11 +6,16 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 16:25:50 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/13 19:45:20 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 09:56:04 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+
+void	ft_putcharr_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
 
 void	ft_puthexa_fd(unsigned long n, t_struct *data, int fd)
 {
@@ -22,7 +27,7 @@ void	ft_puthexa_fd(unsigned long n, t_struct *data, int fd)
 		hxbase = ft_strdup("0123456789abcdef");
 	if (n >= 16)
 		ft_puthexa_fd(n / 16, data, fd);
-	ft_putchar_fd(hxbase[n % 16], fd);
+	ft_putchar_fd(hxbase[n % 16], data, fd);
 	free(hxbase);
 }
 
@@ -30,7 +35,7 @@ void	ft_putunsint_fd(unsigned int n, t_struct *data, int fd)
 {
 	if (n >= 10)
 		ft_putunsint_fd(n / 10, data, fd);
-	ft_putchar_fd((n % 10) + 48, fd);
+	ft_putchar_fd((n % 10) + 48, data, fd);
 }
 
 

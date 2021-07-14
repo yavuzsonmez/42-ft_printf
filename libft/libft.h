@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:41:10 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/06/23 15:43:03 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 09:53:24 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+/* --> Struct for ft_printf and modified putchar, putstr, putnbr <-- */
+typedef struct s_struct
+{
+	int				hash;
+	int				space;
+	int				plus;
+	int				zero;
+	int				minus;
+	int				prec;
+	int				width;
+	int				flen;
+	int				alen;
+	int				print;
+	int				type;
+	int				argint;
+	char			*argstr;
+	unsigned long	argptr;
+	unsigned int	argunsint;
+}	t_struct;
 
 int		ft_atoi(char *str);
 void	ft_bzero(void *s, size_t n);
@@ -32,10 +52,10 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
-void	ft_putchar_fd(char c, int fd);
+void	ft_putchar_fd(char c, t_struct *data, int fd);
+void	ft_putnbr_fd(int n, t_struct *data, int fd);
+void	ft_putstr_fd(char *s, t_struct *data, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);

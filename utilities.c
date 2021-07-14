@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 15:27:41 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 16:11:46 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,27 @@ int	ft_count_digit_long(unsigned long n)
 
 int	ft_get_type(const char *str)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
+	while (*str)
 	{
-		if (str[i] == 'd')
+		if (*str == 'd')
 			return (INTd);
-		else if (str[i] == 'i')
+		else if (*str == 'i')
 			return (INTi);
-		else if (str[i] == 'c')
+		else if (*str == 'c')
 			return (CHAR);
-		else if (str[i] == 's')
+		else if (*str == 's')
 			return (STR);
-		else if (str[i] == 'p')
+		else if (*str == 'p')
 			return (PTR);
-		else if (str[i] == 'x')
+		else if (*str == 'x')
 			return (LOWHEXA);
-		else if (str[i] == 'X')
+		else if (*str == 'X')
 			return (UPHEXA);
-		else if (str[i] == 'u')
+		else if (*str == 'u')
 			return (UNSINT);
-		else if (str[i] == '%')
+		else if (*str == '%')
 			return (PRCT);
-		i++;
+		str++;
 	}
 	return (-1);
 }
@@ -132,9 +129,9 @@ int	ft_set_format(t_struct *data, const char *str)
 	{
 		if (str[i] == '#' && (*data).hash == 0)
 			(*data).hash = 1;
-		else if (str[i] == '+' && (*data).plus == 0)
+		else if (str[i] == '+')
 			(*data).plus = 1;
-		else if (str[i] == ' ' && (*data).space == 0 && (*data).plus == 0)
+		else if (str[i] == ' ' && (*data).plus == 0)
 			(*data).space = 1;
 		else if (str[i] == '-' && (*data).minus == 0)
 			(*data).minus = 1;
@@ -215,7 +212,7 @@ int	ft_printer(va_list args, t_struct *data)
 	return (0);
 }
 
-int		ft_parse_format(va_list args, t_struct *data, const char *str)
+int	ft_parse_format(va_list args, t_struct *data, const char *str)
 {
 	int	state;
 	int	i;

@@ -6,11 +6,12 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 14:29:34 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 15:27:41 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+#include <stdio.h>
 
 t_struct	*new_struct(void)
 {
@@ -159,13 +160,10 @@ int	ft_print_type(t_struct *data)
 		ft_putstr_fd((*data).argstr, data, 1);
 	else if (k == STR && !(*data).argstr)
 		return (0);
-	else if (k == LOWHEXA || k == UPHEXA || k == PTR)
-	{
-		if (k == PTR)
-			ft_puthexa_fd((*data).argptr, data, 1);
-		else
-			ft_puthexa_fd((*data).argunsint, data, 1);
-	}
+	else if (k == LOWHEXA || k == UPHEXA)
+		ft_puthexa_fd((*data).argunsint, data, 1);
+	else if (k == PTR)
+		ft_putunslong_fd((*data).argptr, data, 1);
 	else if (k == UNSINT)
 		ft_putunsint_fd((*data).argunsint, data, 1);
 	else if (k == PRCT && (*data).argint == 1)
@@ -220,18 +218,20 @@ int	ft_printer(va_list args, t_struct *data)
 int		ft_parse_format(va_list args, t_struct *data, const char *str)
 {
 	int	state;
+	int	i;
 
 	state = 0;
+	i = 0;
 	(*data).type = ft_get_type(str);
 	(*data).chartype = ft_get_chartype(data);
 	if ((*data).type == -1 || (*data).chartype == -1)
 		return (-1);
-	state = ft_set_format(data, str);
-	if (state == -1)
+	i = ft_set_format(data, str);
+	if (i == -1)
 		return (-1);
 	state = ft_printer(args, data);
 	if (state == -1)
 		return (-1);
 	//return ((*data.flen))
-	return (2);
+	return (2 + i);
 }

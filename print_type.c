@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 16:25:50 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 13:38:49 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 15:17:34 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putcharr_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-void	ft_puthexa_fd(unsigned long n, t_struct *data, int fd)
+void	ft_puthexa_fd(unsigned int n, t_struct *data, int fd)
 {
 	char	*hxbase;
 
@@ -37,4 +37,14 @@ void	ft_putunsint_fd(unsigned int n, t_struct *data, int fd)
 		ft_putunsint_fd(n / 10, data, fd);
 	ft_putchar_fd((n % 10) + 48, data, fd);
 }
-// if NULL avec %s print (null)
+
+void	ft_putunslong_fd(unsigned long n, t_struct *data, int fd)
+{
+	char	*hxbase;
+
+	hxbase = ft_strdup("0123456789abcdef");
+	if (n >= 16)
+		ft_putunslong_fd(n / 16, data, fd);
+	ft_putchar_fd(hxbase[n % 16], data, fd);
+	free(hxbase);
+}

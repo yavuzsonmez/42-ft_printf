@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 11:29:48 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 13:38:29 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_get_type(const char *str)
 	size_t	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == 'd' || str[i] == 'i')
 			return (INT);
@@ -118,28 +118,29 @@ int	ft_set_format(t_struct *data, const char *str)
 	return (i);
 }
 
-
-int		ft_print_type(t_struct *data)
+int	ft_print_type(t_struct *data)
 {
-	if ((*data).type == INT)
+	int	k;
+
+	k = (*data).type;
+	if (k == INT)
 		ft_putnbr_fd((*data).argint, data, 1);
-	else if ((*data).type == CHAR)
+	else if (k == CHAR)
 		ft_putchar_fd((*data).argint, data, 1);
-	else if ((*data).type == STR && (*data).argstr)
+	else if (k == STR && (*data).argstr)
 		ft_putstr_fd((*data).argstr, data, 1);
-	else if ((*data).type == LOWHEXA || (*data).type == UPHEXA || (*data).type == PTR)
+	else if (k == STR && !(*data).argstr)
+		return (0);
+	else if (k == LOWHEXA || k == UPHEXA || k == PTR)
 	{
-		if ((*data).type == PTR)
-		{
-			ft_putstr_fd("0x", data, 1);
+		if (k == PTR)
 			ft_puthexa_fd((*data).argptr, data, 1);
-		}
 		else
 			ft_puthexa_fd((*data).argunsint, data, 1);
 	}
-	else if ((*data).type == UNSINT)
+	else if (k == UNSINT)
 		ft_putunsint_fd((*data).argunsint, data, 1);
-	else if ((*data).type == PRCT && (*data).argint == 1)
+	else if (k == PRCT && (*data).argint == 1)
 		ft_putchar_fd('%', data, 1);
 	else
 		return (-1);
@@ -148,36 +149,39 @@ int		ft_print_type(t_struct *data)
 
 void	ft_arg_len(va_list args, t_struct *data)
 {
-	if ((*data).type == INT || (*data).type == CHAR)
+	int	k;
+
+	k = (*data).type;
+	if (k == INT || k == CHAR)
 		(*data).argint = va_arg(args, int);
-	else if ((*data).type == PRCT)
+	else if (k == PRCT)
 	{
 		(*data).argint = 1;
 		(*data).alen = 1;
 	}
-	else if ((*data).type == STR)
-	{
+	else if (k == STR)
 		(*data).argstr = va_arg(args, char *);
-		if (!(*data).argstr)
-			ft_putstr_fd("(null)", data, 1);
-	}
-	else if ((*data).type == PTR)
+	else if (k == PTR)
 		(*data).argptr = va_arg(args, unsigned long);
-	else if ((*data).type == LOWHEXA || (*data).type == UPHEXA || (*data).type == UNSINT)
+	else if (k == LOWHEXA || k == UPHEXA || k == UNSINT)
 		(*data).argunsint = va_arg(args, unsigned int);
-	if ((*data).type == INT || (*data).type == CHAR)
+	if (k == INT || k == CHAR)
 		(*data).alen = ft_count_digit((*data).argint);
-	else if ((*data).type == STR && (*data).argstr)
+	else if (k == STR && (*data).argstr)
 		(*data).alen = ft_strlen((*data).argstr);
-	else if ((*data).type == PTR)
+	else if (k == PTR)
 		(*data).alen = ft_count_digit_long((*data).argptr);
-	else if ((*data).type == LOWHEXA || (*data).type == UPHEXA || (*data).type == UNSINT)
+	else if (k == LOWHEXA || k == UPHEXA || k == UNSINT)
 		(*data).alen = ft_count_digit_long((*data).argunsint);
 }
 
-int		ft_printer(va_list args, t_struct *data)
+int	ft_printer(va_list args, t_struct *data)
 {
 	ft_arg_len(args, data);
+	if ((*data).type == STR && !(*data).argstr)
+		ft_putstr_fd("(null)", data, 1);
+	if ((*data).type == PTR)
+		ft_putstr_fd("0x", data, 1);
 	if (ft_print_type(data) == -1)
 		return (-1);
 	return (0);
@@ -185,7 +189,7 @@ int		ft_printer(va_list args, t_struct *data)
 
 int		ft_parse_format(va_list args, t_struct *data, const char *str)
 {
-	int state;
+	int	state;
 
 	state = 0;
 	(*data).type = ft_get_type(str);

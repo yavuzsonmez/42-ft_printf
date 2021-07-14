@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 16:25:50 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 09:56:04 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 13:38:49 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,4 @@ void	ft_putunsint_fd(unsigned int n, t_struct *data, int fd)
 		ft_putunsint_fd(n / 10, data, fd);
 	ft_putchar_fd((n % 10) + 48, data, fd);
 }
-
-
 // if NULL avec %s print (null)

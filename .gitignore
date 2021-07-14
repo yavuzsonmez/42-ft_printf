@@ -2,3 +2,5 @@ a.out
 main.c
 *.o
 libft/*.o
+libft/libft.a
+libftprintf.a

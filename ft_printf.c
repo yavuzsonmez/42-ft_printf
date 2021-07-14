@@ -6,14 +6,14 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:28:05 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 11:28:58 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/14 11:58:26 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include <stdio.h>
 
-int	ft_printf(const char *str, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list		args;
 	t_struct	*data;
@@ -21,16 +21,16 @@ int	ft_printf(const char *str, ...)
 	int			count;
 	int			parser;
 
-	va_start(args, str);
+	va_start(args, format);
 	i = 0;
 	count = 0;
 	parser = 0;
-	while (str[i])
+	while (format[i])
 	{
-		if (str[i] == '%')
+		if (format[i] == '%')
 		{
 			data = new_struct();
-			parser = ft_parse_format(args, data, str + i + 1);
+			parser = ft_parse_format(args, data, format + i + 1);
 			if (parser == -1)
 				return (-1);
 			i += parser;
@@ -39,7 +39,7 @@ int	ft_printf(const char *str, ...)
 		}
 		else
 		{
-			ft_putcharr_fd(str[i], 1);
+			ft_putcharr_fd(format[i], 1);
 			count++;
 			i++;
 		}

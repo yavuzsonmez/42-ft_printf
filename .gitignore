@@ -4,3 +4,4 @@ main.c
 libft/*.o
 libft/libft.a
 libftprintf.a
+tester.c

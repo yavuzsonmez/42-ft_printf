@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 17:03:58 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 10:31:55 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 14:30:29 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	ft_putnbr_fd(int n, t_struct *data, int fd)
 	char			c;
 
 	c = 0;
+	if ((*data).argint == 0 && (*data).plen == 1 && (*data).width == 0 && (*data).prec == 0)
+		return ;
+	if ((*data).plen == 1 && (*data).argint == 0 && (*data).width)
+		return ;
 	if (n < 0)
 		number = n * (-1);
 	else

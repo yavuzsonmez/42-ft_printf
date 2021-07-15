@@ -219,32 +219,32 @@ int     ptr_tester()
     }
     return (boolean);
 }
-/*
+
 int     skip_test()
 {
     int boolean = 1;
     int test; int ft_test;
     char *str = "This is text %%";
     int nbr = INT32_MAX;
-    test = printf("%0-10.1824s ---- this is num %--0.32d", str, nbr) - 22;
+    test = printf("%0-10.1824s ---- this is num %--0.32d", str, nbr);
     printf("\n");
     ft_test = ft_printf("%0-10.1824s ---- this is num %--0.32d", str, nbr);
     printf("\n%d - %d\n", test, ft_test);
     if (test == ft_test)
-        printf("\nOK\n");
+        printf("\nSKIP TEST : OK\n");
     else
     {
-        printf("\nKO\n");
+        printf("\nSKIP TEST : KO\n");
         boolean = 0;
     }
     return (boolean);
 }
-*/
+
 
 int		main(void)
 {
     int testgroup[] = {digit_tester(), str_tester(), test_perc(), char_tester(), int_tester(), unsint_tester(),
-    hexl_tester(), hexu_tester(), ptr_tester()};
+    hexl_tester(), hexu_tester(), ptr_tester(), skip_test()};
     for (size_t i = 0; i < 9; i++)
     {
         if (testgroup[i] == 1)

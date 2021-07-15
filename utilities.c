@@ -6,11 +6,13 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 12:03:41 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 14:25:16 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+
+#include <stdio.h>
 
 t_struct	*new_struct(void)
 {
@@ -130,7 +132,7 @@ int	ft_set_format(t_struct *data, const char *str)
 	while (str[i] && str[i] != (*data).chartype)
 	{
 		if (str[i] >= '1' && str[i] <= '9' && (*data).width == 0)
-			(*data).width = ft_printf_atoi(str + i - 1);
+			(*data).width = ft_printf_atoi(str - 1);
 		else if (str[i] == '.' && (*data).prec == 0)
 		{
 			(*data).prec = ft_printf_atoi(str + i);
@@ -213,6 +215,8 @@ int	ft_printer(va_list args, t_struct *data)
 		ft_putstr_fd("(null)", data, 1);
 	if ((*data).type == PTR)
 		ft_putstr_fd("0x", data, 1);
+	if ((*data).width && (*data).argint == 0 && (*data).plen == 1)
+		ft_putchar_fd(' ', data, 1);
 	ft_print_before(data);
 	if (ft_print_type(data) == -1)
 		return (-1);

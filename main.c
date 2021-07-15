@@ -12,10 +12,11 @@ int main(void)
 	int returnedprintf;
 	int returnedft_printf;
 
-	returnedft_printf = ft_printf("%047d %i %u %c %s %p %x %#X % %\n", 5, -1, 4294967295, 'q', str, ptr, 4294967296, 4294967295);
-	returnedprintf = 	printf("%047d %i %u %c %s %p %x %#X % %\n", 5, -1, 4294967295, 'q', str, ptr, 4294967296, 4294967295);
+	returnedft_printf = ft_printf("%5.4i %.s\n", 81, str);
+	returnedprintf = 	printf("%5.4i %.s\n", 81, str);
 	//printf("%d\n", returnedft_printf);
 	printf("My return : %d\nPrintf return : %d\n", returnedft_printf, returnedprintf);
-
 	return (0);
 }
+
+//returnedprintf = 	printf("%-3d %i %u %c %s %p %x %#X %-3%\n", 5, -1, 4294967, 'q', str, ptr, 4294967, 4294967);

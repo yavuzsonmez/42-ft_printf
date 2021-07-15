@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 17:02:22 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 11:27:47 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_struct	*new_struct(void)
 	(*p_data).plus = 0;
 	(*p_data).zero = 0;
 	(*p_data).minus = 0;
-	(*p_data).prec = 0;
+	(*p_data).prec = -1;
 	(*p_data).width = 0;
 	(*p_data).flen = 0;
 	(*p_data).alen = 0;
@@ -44,7 +44,10 @@ int	ft_count_digit(int n)
 	if (n == -2147483648)
 		return (10);
 	if (n < 0)
+	{
 		n = n * (-1);
+		i++;
+	}
 	while (n >= 10)
 	{
 		n /= 10;
@@ -126,14 +129,18 @@ int	ft_set_format(t_struct *data, const char *str)
 	i = 0;
 	while (str[i] && str[i] != (*data).chartype)
 	{
-		if (str[i] == '#' && (*data).hash == 0)
+		if (str[i] >= '1' && str[i] <= '9' && (*data).width == 0)
+			(*data).width = ft_printf_atoi(str + i - 1);
+		else if (str[i] == '.' && (*data).prec == -1)
+			(*data).prec = ft_printf_atoi(str + i);
+		else if (str[i] == '#' && (*data).hash == 0)
 			(*data).hash = 1;
 		else if (str[i] == '+')
 			(*data).plus = 1;
 		else if (str[i] == ' ' && (*data).plus == 0)
 			(*data).space = 1;
 		else if (str[i] == '-' && (*data).minus == 0)
-			(*data).minus = 1;
+			(*data).minus = ft_printf_atoi(str + i);
 		else if (str[i] == '0' && (*data).zero == 0 && (*data).minus == 0)
 			(*data).zero = ft_printf_atoi(str + i);
 		else if (str[i] >= '0' && str[i] <= '9')

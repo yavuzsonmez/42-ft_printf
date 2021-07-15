@@ -2,6 +2,7 @@ a.out
 main.c
 *.o
 libft/*.o
-libft/libft.a
+/libft/libft.a
 libftprintf.a
 tester.c
+/42tester_printf/

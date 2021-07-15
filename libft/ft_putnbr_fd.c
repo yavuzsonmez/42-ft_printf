@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 17:03:58 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 09:48:32 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 10:31:55 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ void	ft_putnbr_fd(int n, t_struct *data, int fd)
 
 	c = 0;
 	if (n < 0)
-	{
 		number = n * (-1);
-		ft_putchar_fd('-', data, fd);
-	}
 	else
 		number = n;
 	if (number >= 10)

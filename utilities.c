@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 14:25:16 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 16:50:09 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,8 +215,6 @@ int	ft_printer(va_list args, t_struct *data)
 		ft_putstr_fd("(null)", data, 1);
 	if ((*data).type == PTR)
 		ft_putstr_fd("0x", data, 1);
-	if ((*data).width && (*data).argint == 0 && (*data).plen == 1)
-		ft_putchar_fd(' ', data, 1);
 	ft_print_before(data);
 	if (ft_print_type(data) == -1)
 		return (-1);

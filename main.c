@@ -12,8 +12,8 @@ int main(void)
 	int returnedprintf;
 	int returnedft_printf;
 
-	returnedft_printf = ft_printf("%0-10.1824s ---- this is num %--0.32d\n", str, 2147483647);
-	returnedprintf = 	printf("%0-10.1824s ---- this is num %--0.32d\n", str, 2147483647);
+	returnedft_printf = ft_printf("%-1.d\n", 0);
+	returnedprintf = 	printf("%-1.d\n", 0);
 	//printf("%d\n", returnedft_printf);
 	printf("My return : %d\nPrintf return : %d\n", returnedft_printf, returnedprintf);
 	return (0);

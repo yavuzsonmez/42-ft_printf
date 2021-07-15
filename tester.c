@@ -226,9 +226,9 @@ int     skip_test()
     int test; int ft_test;
     char *str = "This is text %%";
     int nbr = INT32_MAX;
-    test = printf("%0-10.1824s ---- this is num %--0.32d", str, nbr);
+    test = printf("%0-10.3s ---- this is num %--0.32d", str, nbr);
     printf("\n");
-    ft_test = ft_printf("%0-10.1824s ---- this is num %--0.32d", str, nbr);
+    ft_test = ft_printf("%0-10.3s ---- this is num %--0.32d", str, nbr);
     printf("\n%d - %d\n", test, ft_test);
     if (test == ft_test)
         printf("\nSKIP TEST : OK\n");

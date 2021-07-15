@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 17:01:35 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 18:49:44 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_print_before(t_struct *data)
 	i = 0;
 	if ((*data).width && (*data).argint == 0 && (*data).plen == 1 && (*data).prec == 0)
 		ft_putchar_fd(' ', data, 1);
-	if ((*data).width)
+	if ((*data).width && ((*data).alen) < (*data).width)
 	{
 		while (i < (*data).width - ((*data).alen) - ((*data).prec))
 		{
@@ -64,24 +64,18 @@ void	ft_print_before(t_struct *data)
 void	ft_print_after(t_struct *data)
 {
 	int i;
-	int x;
-	int k;
 
-	i = 0;
-	x = (*data).prec - (*data).alen;
-	k = (*data).minus - x - (*data).alen;
-	//printf("X : %d\nK : %d\n", x, k);
-	//printf("ALEN : %d\nARGINT : %d\nPLEN : %d\nPREC : %d\nWIDTH : %d\nMINUS : %d\n",(*data).alen, (*data).argint, (*data).plen, (*data).prec, (*data).width, (*data).minus);
-	//if ((*data).minus && (*data).plen == 1 && (*data).prec == 0)
-	//	ft_putchar_fd(' ', data, 1);
+	i = 1;
 	if ((*data).minus)
 	{
-		while (i < k)
+		while (i < (*data).minus && (*data).alen < (*data).minus)
 		{
 			ft_putchar_fd(' ', data, 1);
 			i++;
 		}
 	}
+	if ((*data).minus && (*data).plen && (*data).prec == 0 && (*data).argint == 0)
+		ft_putchar_fd(' ', data, 1);
 }
 
 int	ft_printf_atoi(const char *str)

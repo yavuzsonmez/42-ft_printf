@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 11:27:47 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 12:03:41 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_struct	*new_struct(void)
 	(*p_data).plus = 0;
 	(*p_data).zero = 0;
 	(*p_data).minus = 0;
-	(*p_data).prec = -1;
+	(*p_data).prec = 0;
 	(*p_data).width = 0;
-	(*p_data).flen = 0;
+	(*p_data).plen = 0;
 	(*p_data).alen = 0;
 	(*p_data).print = 0;
 	(*p_data).type = 0;
@@ -131,8 +131,11 @@ int	ft_set_format(t_struct *data, const char *str)
 	{
 		if (str[i] >= '1' && str[i] <= '9' && (*data).width == 0)
 			(*data).width = ft_printf_atoi(str + i - 1);
-		else if (str[i] == '.' && (*data).prec == -1)
+		else if (str[i] == '.' && (*data).prec == 0)
+		{
 			(*data).prec = ft_printf_atoi(str + i);
+			(*data).plen = 1;
+		}
 		else if (str[i] == '#' && (*data).hash == 0)
 			(*data).hash = 1;
 		else if (str[i] == '+')

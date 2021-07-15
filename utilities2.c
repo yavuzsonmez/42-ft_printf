@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 11:19:08 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 12:21:16 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_print_before(t_struct *data)
 	i = 0;
 	if ((*data).width)
 	{
-		while (i < (*data).width - (*data).alen)
+		while (i < (*data).width - (*data).alen - (*data).prec)
 		{
 			ft_putchar_fd(' ', data, 1);
 			i++;

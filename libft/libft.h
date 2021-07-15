@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:41:10 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 13:48:12 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/15 12:05:36 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_struct
 	int				minus;
 	int				prec;
 	int				width;
-	int				flen;
+	int				plen;
 	int				alen;
 	int				print;
 	int				type;

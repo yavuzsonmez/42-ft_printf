@@ -6,13 +6,11 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 14:33:22 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 16:02:43 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 t_struct	*new_struct(void)
 {
@@ -26,7 +24,6 @@ t_struct	*new_struct(void)
 	(*p_data).minus = 0;
 	(*p_data).prec = 0;
 	(*p_data).width = 0;
-	(*p_data).plen = 0;
 	(*p_data).alen = 0;
 	(*p_data).print = 0;
 	(*p_data).type = 0;

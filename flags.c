@@ -6,13 +6,11 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 14:10:19 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 16:14:18 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <printf.h>
 
 void	ft_print_before(t_struct *data)
 {
@@ -21,15 +19,21 @@ void	ft_print_before(t_struct *data)
 
 	k = (*data).type;
 	i = 0;
-	if ((*data).width && (*data).argint == 0 && (*data).plen == 1 && (*data).prec == 0 && (*data).minus == 0)
-		ft_putchar_fd(' ', data, 1);
+	//printf("WIDTH : %d\n", (*data).width);
 	if ((*data).width && (*data).minus == 0 && (*data).zero == 0)
 	{
-		while (i < (*data).width - ((*data).alen))
-		{
-			ft_putchar_fd(' ', data, 1);
-			i++;
-		}
+		if ((*data).alen)
+			while (i < (*data).width - (*data).alen)
+			{
+				ft_putchar_fd(' ', data, 1);
+				i++;
+			}
+		else
+			while (i < (*data).width)
+			{
+				ft_putchar_fd(' ', data, 1);
+				i++;
+			}
 		i = 0;
 	}
 	if ((*data).argint < 0 && (k == INTD || k == INTI))
@@ -46,9 +50,9 @@ void	ft_print_before(t_struct *data)
 	}
 	if ((*data).plus && (k == INTI || k == INTD) && (*data).argint >= 0)
 		ft_putchar_fd('+', data, 1);
-	if ((*data).space && (*data).plus == 0 && (k == INTD || k == INTI))
+	if ((*data).space && (*data).argint >=0 && (*data).plus == 0 && (k == INTD || k == INTI))
 		ft_putchar_fd(' ', data, 1);
-	if ((*data).zero && (*data).minus == 0 && (*data).plen == 0 && k != CHAR && k != STR && k != PTR && k != PRCT)
+	if ((*data).zero && (*data).minus == 0 && k != CHAR && k != STR && k != PTR && k != PRCT)
 	{
 		while (i < (*data).zero - (*data).alen)
 		{
@@ -99,8 +103,6 @@ void	ft_print_after(t_struct *data)
 		}
 		i = 0;
 	}
-	if ((*data).minus && (*data).plen && (*data).prec == 0 && (*data).argint == 0)
-		ft_putchar_fd(' ', data, 1);
 }
 
 int	ft_printf_atoi(const char *str)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities2.c                                       :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yavuzsonmez <yavuzsonmez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 09:54:45 by yavuzsonmez      ###   ########.fr       */
+/*   Updated: 2021/07/16 14:10:19 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 void	ft_print_before(t_struct *data)
 {
 	int	k;
-	int i;
+	int	i;
 
 	k = (*data).type;
 	i = 0;
-	if ((*data).width && (*data).argint == 0 && (*data).plen == 1 && (*data).prec == 0)
+	if ((*data).width && (*data).argint == 0 && (*data).plen == 1 && (*data).prec == 0 && (*data).minus == 0)
 		ft_putchar_fd(' ', data, 1);
-	if ((*data).width && ((*data).alen) < (*data).width)
+	if ((*data).width && (*data).minus == 0 && (*data).zero == 0)
 	{
-		while (i < (*data).width - ((*data).alen) - ((*data).prec))
+		while (i < (*data).width - ((*data).alen))
 		{
 			ft_putchar_fd(' ', data, 1);
 			i++;
@@ -35,14 +35,20 @@ void	ft_print_before(t_struct *data)
 	if ((*data).argint < 0 && (k == INTD || k == INTI))
 		ft_putchar_fd('-', data, 1);
 	if ((*data).hash && (*data).argunsint != 0 && k == LOWHEXA)
+	{
 		ft_putstr_fd("0x", data, 1);
+		(*data).alen += 2;
+	}
 	else if ((*data).hash && (*data).argunsint != 0 && k == UPHEXA)
+	{
 		ft_putstr_fd("0X", data, 1);
+		(*data).alen += 2;
+	}
 	if ((*data).plus && (k == INTI || k == INTD) && (*data).argint >= 0)
 		ft_putchar_fd('+', data, 1);
 	if ((*data).space && (*data).plus == 0 && (k == INTD || k == INTI))
 		ft_putchar_fd(' ', data, 1);
-	if ((*data).zero && (k == INTD || k == INTI || k == LOWHEXA|| k == UPHEXA || k == UNSINT))
+	if ((*data).zero && (*data).minus == 0 && (*data).plen == 0 && k != CHAR && k != STR && k != PTR && k != PRCT)
 	{
 		while (i < (*data).zero - (*data).alen)
 		{
@@ -63,9 +69,18 @@ void	ft_print_before(t_struct *data)
 
 void	ft_print_after(t_struct *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if ((*data).width && (*data).minus == 1)
+	{
+		while (i < (*data).width - ((*data).alen))
+		{
+			ft_putchar_fd(' ', data, 1);
+			i++;
+		}
+		i = 0;
+	}
 	if ((*data).minus)
 	{
 		while (i < (*data).minus && i < (*data).alen)

@@ -6,15 +6,16 @@
 #    By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 11:10:43 by ysonmez           #+#    #+#              #
-#    Updated: 2021/07/15 10:25:41 by ysonmez          ###   ########.fr        #
+#    Updated: 2021/07/16 12:37:16 by ysonmez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=		libftprintf.a
 
 SRCS	=		ft_printf.c \
-				utilities.c \
-				utilities2.c \
+				setup.c \
+				format.c \
+				flags.c \
 				print_type.c \
 
 OBJS	=		$(SRCS:.c=.o)

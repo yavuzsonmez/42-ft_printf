@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:13:02 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 16:57:00 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 14:33:38 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
+#ifndef FT_PRINTF_H
 
-# define PRINTF_H
+# define FT_PRINTF_H
 
 # include "libft/libft.h"
 # include <stdarg.h>
@@ -29,7 +29,8 @@
 
 t_struct	*new_struct(void);
 int			ft_count_digit(int n);
-int			ft_count_digit_long(unsigned long n);
+void		ft_count_digit_hexa(unsigned long n, t_struct *data);
+int			ft_count_digit_unsint(unsigned int n);
 int			ft_get_type(const char *str);
 int			ft_get_chartype(t_struct *data);
 int			ft_set_format(t_struct *data, const char *str);

@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 18:12:37 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 18:28:10 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,18 @@ void	ft_print_before(t_struct *data)
 		}
 		i = 0;
 	}
-	while ((*data).prec > (*data).alen && (k != STR))
-	{
-		ft_putchar_fd('0', data, 1);
-		(*data).prec--;
-	}
+	if ((*data).argint < 0)
+		while ((*data).prec > (*data).alen - 1 && (k != STR))
+		{
+			ft_putchar_fd('0', data, 1);
+			(*data).prec--;
+		}
+	else
+		while ((*data).prec > (*data).alen && (k != STR))
+		{
+			ft_putchar_fd('0', data, 1);
+			(*data).prec--;
+		}
 }
 
 void	ft_print_after(t_struct *data)

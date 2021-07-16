@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utilities2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yavuzsonmez <yavuzsonmez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 18:49:44 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 09:54:45 by yavuzsonmez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 #include <printf.h>
 
@@ -65,14 +65,24 @@ void	ft_print_after(t_struct *data)
 {
 	int i;
 
-	i = 1;
+	i = 0;
 	if ((*data).minus)
 	{
-		while (i < (*data).minus && (*data).alen < (*data).minus)
+		while (i < (*data).minus && i < (*data).alen)
 		{
 			ft_putchar_fd(' ', data, 1);
 			i++;
 		}
+		i = 0;
+	}
+	if ((*data).type == STR && (*data).alen == 0 )
+	{
+		while (i < (*data).minus)
+		{
+			ft_putchar_fd(' ', data, 1);
+			i++;
+		}
+		i = 0;
 	}
 	if ((*data).minus && (*data).plen && (*data).prec == 0 && (*data).argint == 0)
 		ft_putchar_fd(' ', data, 1);

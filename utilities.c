@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yavuzsonmez <yavuzsonmez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/15 16:50:09 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 09:11:54 by yavuzsonmez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 #include <stdio.h>
 

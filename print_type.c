@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yavuzsonmez <yavuzsonmez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 16:25:50 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/14 15:17:34 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 09:11:33 by yavuzsonmez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 void	ft_putcharr_fd(char c, int fd)
 {

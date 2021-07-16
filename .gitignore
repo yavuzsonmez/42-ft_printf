@@ -6,3 +6,4 @@ libft/libft.a
 libftprintf.a
 tester.c
 42tester_printf/
+42tester_printf/*

@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 16:02:43 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 18:04:30 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_struct	*new_struct(void)
 	(*p_data).plus = 0;
 	(*p_data).zero = 0;
 	(*p_data).minus = 0;
-	(*p_data).prec = 0;
+	(*p_data).prec = -1;
 	(*p_data).width = 0;
 	(*p_data).alen = 0;
 	(*p_data).print = 0;

@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 12:34:59 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 16:56:54 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/16 18:17:28 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	ft_set_format(t_struct *data, const char *str)
 			(*data).minus = ft_printf_atoi(str + i);
 		else if (str[i] == '0' && (*data).zero == 0 && (*data).minus == 0)
 			(*data).zero = ft_printf_atoi(str + i);
-		else if (str[i] >= '1' && str[i] <= '9' && (*data).width == 0)
+		else if (str[i] >= '1' && str[i] <= '9' && (*data).width == 0 && (*data).prec == -1)
 			(*data).width = ft_printf_atoi(str + i - 1);
-		else if (str[i] == '.' && (*data).prec == 0)
+		else if (str[i] == '.' && (*data).prec == -1)
 			(*data).prec = ft_printf_atoi(str + i);
 		else if (!(str[i] >= '0' && str[i] <= '9'))
 			return (-1);

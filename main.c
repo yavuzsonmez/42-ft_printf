@@ -12,8 +12,8 @@ int main(void)
 	int returnedprintf;
 	int returnedft_printf;
 
-	returnedft_printf = ft_printf("%-2p\n", 1);
-	returnedprintf = 	printf("%-2p\n", 1);
+	returnedft_printf = ft_printf("%.1s\n", "");
+	returnedprintf = 	printf("%.1s\n", "");
 	//printf("%d\n", returnedft_printf);
 	printf("My return : %d\nPrintf return : %d\n", returnedft_printf, returnedprintf);
 	return (0);

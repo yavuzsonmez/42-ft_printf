@@ -6,34 +6,11 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:51:21 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 18:04:30 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 13:49:07 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-t_struct	*new_struct(void)
-{
-	t_struct	*p_data;
-
-	p_data = (t_struct *)malloc(sizeof(t_struct));
-	(*p_data).hash = 0;
-	(*p_data).space = 0;
-	(*p_data).plus = 0;
-	(*p_data).zero = 0;
-	(*p_data).minus = 0;
-	(*p_data).prec = -1;
-	(*p_data).width = 0;
-	(*p_data).alen = 0;
-	(*p_data).print = 0;
-	(*p_data).type = 0;
-	(*p_data).chartype = 0;
-	(*p_data).argint = 0;
-	(*p_data).argstr = 0;
-	(*p_data).argptr = 0;
-	(*p_data).argunsint = 0;
-	return (p_data);
-}
 
 int	ft_count_digit(int n)
 {

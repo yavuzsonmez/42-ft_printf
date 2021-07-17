@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 11:53:13 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 14:22:28 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,90 +20,28 @@ void	ft_print_before(t_struct *data)
 	k = (*data).type;
 	i = 0;
 	if ((*data).width && (*data).minus == 0 && (*data).zero == 0)
-	{
-		if ((*data).width == (*data).prec)
-			(*data).width = 0;
-		if ((k == INTD || k == INTI) && (*data).argint == 0 && (*data).prec == 0)
-			while (i <= (*data).width - (*data).alen)
-			{
-				ft_putchar_fd(' ', data, 1);
-				i++;
-			}
-		else if (k == STR && (*data).prec == 0)
-			while (i < (*data).width)
-			{
-				ft_putchar_fd(' ', data, 1);
-				i++;
-			}
-		else if ((*data).alen)
-			while (i < (*data).width - (*data).alen)
-			{
-				ft_putchar_fd(' ', data, 1);
-				i++;
-			}
-		else
-			while (i < (*data).width)
-			{
-				ft_putchar_fd(' ', data, 1);
-				i++;
-			}
-		i = 0;
-	}
+		ft_width(data);
 	if ((*data).argint < 0 && (k == INTD || k == INTI))
 		ft_putchar_fd('-', data, 1);
-	if ((*data).hash && (*data).argunsint != 0 && k == LOWHEXA)
-	{
-		ft_putstr_fd("0x", data, 1);
-		(*data).alen += 2;
-	}
-	else if ((*data).hash && (*data).argunsint != 0 && k == UPHEXA)
-	{
-		ft_putstr_fd("0X", data, 1);
-		(*data).alen += 2;
-	}
+	ft_hash(data);
 	if ((*data).plus && (k == INTI || k == INTD) && (*data).argint >= 0)
 		ft_putchar_fd('+', data, 1);
 	if ((*data).space && (*data).argint >=0 && (*data).plus == 0 && (k == INTD || k == INTI))
 		ft_putchar_fd(' ', data, 1);
 	if ((*data).zero && (*data).minus == 0 && k != CHAR && k != STR && k != PTR && k != PRCT)
-	{
-		while (i < (*data).zero - (*data).alen)
-		{
-			ft_putchar_fd('0', data, 1);
-			i++;
-		}
-		i = 0;
-	}
-	if ((*data).argint < 0)
-		while ((*data).prec > (*data).alen - 1 && (k != STR))
-		{
-			ft_putchar_fd('0', data, 1);
-			(*data).prec--;
-		}
-	else
-		while ((*data).prec > (*data).alen && (k != STR))
-		{
-			ft_putchar_fd('0', data, 1);
-			(*data).prec--;
-		}
+		ft_zero(data);
+	ft_prec(data);
 }
 
 void	ft_print_after(t_struct *data)
 {
-	int	i;
-	int k;
-	int len;
-
-	i = 0;
-	k = (*data).type;
-	len = (*data).alen;
-	while ((*data).minus > len)
+	while ((*data).minus > (*data).alen)
 	{
 		ft_putchar_fd(' ', data, 1);
 		(*data).minus--;
 	}
-	if ((k == INTD || k == INTI) && (*data).argint == 0 && (*data).prec == 0)
-		while (i <= (*data).minus - (*data).alen)
+	if (((*data).type == INTD || (*data).type == INTI) && (*data).argint == 0 && (*data).prec == 0)
+		while (0 <= (*data).minus - (*data).alen)
 		{
 			ft_putchar_fd(' ', data, 1);
 			(*data).minus--;

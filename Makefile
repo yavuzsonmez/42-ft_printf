@@ -6,7 +6,7 @@
 #    By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 11:10:43 by ysonmez           #+#    #+#              #
-#    Updated: 2021/07/16 12:37:16 by ysonmez          ###   ########.fr        #
+#    Updated: 2021/07/17 14:12:30 by ysonmez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ SRCS	=		ft_printf.c \
 				format.c \
 				flags.c \
 				print_type.c \
+				ft_width.c \
+				ft_hash.c \
+				ft_zero.c \
 
 OBJS	=		$(SRCS:.c=.o)
 

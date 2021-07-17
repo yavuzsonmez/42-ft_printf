@@ -25,12 +25,14 @@ int main(void)
 	char	*s = "-2147483648";
 	char	*t = "0x12345678";
 	char	*u = "-0";
+	char *str = "This is text %%";
+    int nbr = 2147483647;
 
 	int returnedprintf;
 	int returnedft_printf;
 
-	returnedft_printf = ft_printf("%2.s,%2.s,%2.s,%2.s,%2.s\n", n, o, p, q, r);
-	returnedprintf = 	printf("%2.s,%2.s,%2.s,%2.s,%2.s\n", n, o, p, q, r);
+	returnedft_printf = ft_printf("%0-10.3s ---- this is num %--0.32d\n", str, nbr);
+	returnedprintf = 	printf("%0-10.3s ---- this is num %--0.32d\n", str, nbr);
 	//printf("%d\n", returnedft_printf);
 	printf("My return : %d\nPrintf return : %d\n", returnedft_printf, returnedprintf);
 	return (0);

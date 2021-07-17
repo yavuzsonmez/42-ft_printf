@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:28:05 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 13:56:32 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 15:45:01 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	i = 0;
 	count = 0;
-	parser = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')

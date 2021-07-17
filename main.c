@@ -29,8 +29,8 @@ int main(void)
 	int returnedprintf;
 	int returnedft_printf;
 
-	returnedft_printf = ft_printf("%12.12i, %12.12d\n", -42, 42);
-	returnedprintf = 	printf("%12.12i, %12.12d\n", -42, 42);
+	returnedft_printf = ft_printf("%2.s,%2.s,%2.s,%2.s,%2.s\n", n, o, p, q, r);
+	returnedprintf = 	printf("%2.s,%2.s,%2.s,%2.s,%2.s\n", n, o, p, q, r);
 	//printf("%d\n", returnedft_printf);
 	printf("My return : %d\nPrintf return : %d\n", returnedft_printf, returnedprintf);
 	return (0);

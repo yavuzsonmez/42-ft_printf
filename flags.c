@@ -6,12 +6,11 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:20:44 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 10:44:09 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 11:53:13 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	ft_print_before(t_struct *data)
 {
@@ -20,13 +19,18 @@ void	ft_print_before(t_struct *data)
 
 	k = (*data).type;
 	i = 0;
-	//printf("WIDTH : %d\n", (*data).width);
 	if ((*data).width && (*data).minus == 0 && (*data).zero == 0)
 	{
 		if ((*data).width == (*data).prec)
 			(*data).width = 0;
 		if ((k == INTD || k == INTI) && (*data).argint == 0 && (*data).prec == 0)
 			while (i <= (*data).width - (*data).alen)
+			{
+				ft_putchar_fd(' ', data, 1);
+				i++;
+			}
+		else if (k == STR && (*data).prec == 0)
+			while (i < (*data).width)
 			{
 				ft_putchar_fd(' ', data, 1);
 				i++;

@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:13:02 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 16:50:33 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 17:41:40 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void		ft_zero(t_struct *data);
 void		ft_prec(t_struct *data);
 int			ft_printf_atoi(const char *str);
 
-t_struct	*new_struct(void);
 int			ft_parse_format(va_list args, t_struct *data, const char *str);
 int			ft_printf(const char *str, ...);
 

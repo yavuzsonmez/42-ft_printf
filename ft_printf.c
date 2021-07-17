@@ -6,13 +6,13 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:28:05 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 16:48:58 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 17:41:49 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_struct	*new_struct(void)
+static t_struct	*new_struct(void)
 {
 	t_struct	*p_data;
 
@@ -33,6 +33,19 @@ t_struct	*new_struct(void)
 	(*p_data).argptr = 0;
 	(*p_data).argunsint = 0;
 	return (p_data);
+}
+
+static void	ft_setvarzero(int *count, int *i)
+{
+	*count = 0;
+	*i = 0;
+}
+
+static void	ft_put_normal(char format, int *count, int *i)
+{
+	ft_putcharr_fd(format, 1);
+	(*count)++;
+	(*i)++;
 }
 
 int	ft_parse_format(va_list args, t_struct *data, const char *str)
@@ -64,8 +77,7 @@ int	ft_printf(const char *format, ...)
 	int			parser;
 
 	va_start(args, format);
-	i = 0;
-	count = 0;
+	ft_setvarzero(&count, &i);
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -79,11 +91,7 @@ int	ft_printf(const char *format, ...)
 			free(data);
 		}
 		else
-		{
-			ft_putcharr_fd(format[i], 1);
-			count++;
-			i++;
-		}
+			ft_put_normal(format[i], &count, &i);
 	}
 	va_end(args);
 	return (count);

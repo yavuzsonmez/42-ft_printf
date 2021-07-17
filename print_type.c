@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yavuzsonmez <yavuzsonmez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 16:25:50 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/16 09:11:33 by yavuzsonmez      ###   ########.fr       */
+/*   Updated: 2021/07/17 16:53:58 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,19 @@ void	ft_putunslong_fd(unsigned long n, t_struct *data, int fd)
 		ft_putunslong_fd(n / 16, data, fd);
 	ft_putchar_fd(hxbase[n % 16], data, fd);
 	free(hxbase);
+}
+
+int	ft_printf_atoi(const char *str)
+{
+	size_t	i;
+	int		result;
+
+	i = 1;
+	result = 0;
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		result = result * 10 + ((str[i] - 48) % 10);
+		i++;
+	}
+	return (result);
 }

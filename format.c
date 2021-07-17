@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 12:34:59 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 15:35:58 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 16:52:18 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,6 @@ int	ft_set_format(t_struct *data, const char *str)
 		i++;
 	}
 	return (i);
-}
-
-int	ft_print_type(t_struct *data)
-{
-	int	k;
-
-	k = (*data).type;
-	if (k == INTD || k == INTI)
-		ft_putnbr_fd((*data).argint, data, 1);
-	else if (k == CHAR)
-		ft_putchar_fd((*data).argint, data, 1);
-	else if (k == STR && (*data).argstr)
-		ft_putstr_fd((*data).argstr, data, 1);
-	else if (k == STR && !(*data).argstr)
-		return (0);
-	else if (k == LOWHEXA || k == UPHEXA)
-		ft_puthexa_fd((*data).argunsint, data, 1);
-	else if (k == PTR)
-		ft_putunslong_fd((*data).argptr, data, 1);
-	else if (k == UNSINT)
-		ft_putunsint_fd((*data).argunsint, data, 1);
-	else if (k == PRCT)
-		ft_putchar_fd('%', data, 1);
-	else
-		return (-1);
-	return (0);
 }
 
 void	ft_arg_len(va_list args, t_struct *data)
@@ -109,24 +83,4 @@ int	ft_printer(va_list args, t_struct *data)
 		return (-1);
 	ft_print_after(data);
 	return (0);
-}
-
-int	ft_parse_format(va_list args, t_struct *data, const char *str)
-{
-	int	state;
-	int	i;
-
-	state = 0;
-	i = 0;
-	(*data).type = ft_get_type(str);
-	(*data).chartype = ft_get_chartype(data);
-	if ((*data).type == -1 || (*data).chartype == -1)
-		return (-1);
-	i = ft_set_format(data, str);
-	if (i == -1)
-		return (-1);
-	state = ft_printer(args, data);
-	if (state == -1)
-		return (-1);
-	return (2 + i);
 }

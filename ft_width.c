@@ -6,18 +6,16 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 13:56:03 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 14:45:39 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/17 15:10:23 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_width(t_struct *data)
+void	ft_width(t_struct *data, int k)
 {
-	int	k;
 	int	i;
 
-	k = (*data).type;
 	i = 0;
 	if ((*data).width == (*data).prec)
 		(*data).width = 0;

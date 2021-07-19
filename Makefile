@@ -34,7 +34,8 @@ RM		=		rm -f
 .c.o:
 			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-$(NAME):	make -C ./libft
+$(NAME):	
+			make -C ./libft
 			cp ./libft/libft.a $(NAME)
 			$(CC) $(CFLAGS) -c $(SRCS)
 			$(AR) $(NAME) $(OBJS)

@@ -9,3 +9,5 @@ tester.c
 42tester_printf/*
 printf_tester/*
 printf_tester/
+pstester/
+pstester/*

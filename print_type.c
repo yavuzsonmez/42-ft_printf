@@ -6,7 +6,7 @@
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 16:25:50 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 16:53:58 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/19 10:10:19 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	ft_puthexa_fd(unsigned int n, t_struct *data, int fd)
 
 void	ft_putunsint_fd(unsigned int n, t_struct *data, int fd)
 {
+	if ((*data).argunsint == 0 && (*data).prec == 0)
+		return ;
 	if (n >= 10)
 		ft_putunsint_fd(n / 10, data, fd);
 	ft_putchar_fd((n % 10) + 48, data, fd);

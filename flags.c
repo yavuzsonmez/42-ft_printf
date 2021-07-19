@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_width.c                                         :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysonmez <ysonmez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 13:56:03 by ysonmez           #+#    #+#             */
-/*   Updated: 2021/07/17 16:42:07 by ysonmez          ###   ########.fr       */
+/*   Updated: 2021/07/19 09:54:19 by ysonmez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_width(t_struct *data, int k)
 		while (i++ < (*data).width - (*data).alen)
 			ft_putchar_fd(' ', data, 1);
 	}
-	else
+	else if (k == STR && (*data).alen == 0)
 	{
 		while (i++ < (*data).width)
 			ft_putchar_fd(' ', data, 1);
